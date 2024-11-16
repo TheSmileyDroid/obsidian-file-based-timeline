@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "file-based-timeline",
 	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"description": "Create a timeline based on files in a folder",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
