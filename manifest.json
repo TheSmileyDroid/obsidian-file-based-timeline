@@ -1,0 +1,10 @@
+{
+	"id": "file-based-timeline",
+	"name": "File Based Timeline",
+	"version": "0.0.1",
+	"minAppVersion": "0.15.0",
+	"description": "Create a timeline based on files in a folder",
+	"author": "TheSmileyDroid",
+	"authorUrl": "https://github.com/TheSmileyDroid",
+	"isDesktopOnly": false
+}

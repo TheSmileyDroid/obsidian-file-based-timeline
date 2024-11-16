@@ -1,0 +1,12 @@
+.timeline-event {
+	margin-bottom: 10px;
+}
+
+.timeline-date {
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.timeline-link {
+	text-decoration: none;
+}
