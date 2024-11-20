@@ -1,32 +1,74 @@
-.timeline {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.timeline-date {
-	font-weight: bold;
-	margin-right: 5px;
-	white-space: nowrap;
-	width: 50%;
-	text-align: right;
-	border-right: 3px solid var(--text-accent);
-	padding: 5px;
-	min-height: 100%;
-}
-
-.timeline-event {
-	display: flex;
-	margin-bottom: 10px;
+/* Timeline Table Styles */
+.timeline-table {
 	width: 100%;
-	height: 100%;
+	border-collapse: separate;
+	border-spacing: 0 8px;
+	margin: 1rem 0;
 }
 
-.timeline-list {
-	padding: 0;
-	margin: 0;
+/* Timeline Row Styles */
+.timeline-row {
+	transition: background-color 0.2s ease;
 }
 
+.timeline-row:hover {
+	background-color: var(--background-modifier-hover);
+	border-radius: 6px;
+}
+
+/* Date Cell Styles */
+.timeline-date {
+	padding: 8px 16px;
+	min-width: 120px;
+	color: var(--text-muted);
+	font-size: 0.9em;
+	vertical-align: top;
+	border-right: 2px solid var(--interactive-accent);
+}
+
+/* Events Cell Styles */
+.timeline-events {
+	padding: 8px 16px;
+	position: relative;
+}
+
+/* Timeline Link Styles */
 .timeline-link {
+	color: var(--text-normal);
 	text-decoration: none;
+	padding: 4px 8px;
+	margin: 2px 0;
+	border-radius: 4px;
+	display: inline-block;
+	transition: all 0.2s ease;
+}
+
+.timeline-link:hover {
+	color: var(--text-accent);
+	background-color: var(--background-modifier-hover);
+	text-decoration: none;
+}
+
+/* Add dot for each event */
+.timeline-link::before {
+	content: "•";
+	color: var(--interactive-accent);
+	margin-right: 8px;
+	font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+	.timeline-table {
+		border-spacing: 0 4px;
+	}
+
+	.timeline-date {
+		min-width: 100px;
+		padding: 6px 12px;
+	}
+
+	.timeline-events {
+		padding: 6px 12px;
+	}
 }

@@ -21,7 +21,7 @@ interface DateInfo {
 function formatDate(
 	date: DateInfo,
 	format: string,
-	config: CalendarConfig
+	config: CalendarConfig,
 ): string {
 	const year = date.year.toString();
 	const month = (date.month + 1).toString().padStart(2, "0");
@@ -55,7 +55,7 @@ function formatDate(
 				return weekday;
 			case "W":
 				return Math.floor(
-					totalDays / config.weekdays.length
+					totalDays / config.weekdays.length,
 				).toString();
 			case "G":
 				return "AD";
@@ -88,7 +88,7 @@ function formatDate(
 export async function renderTimeline(
 	plugin: TTRPGTimelinePlugin,
 	{ eventsFolder, calendarConfig, dateFormat }: FBTSettings,
-	container: Element
+	container: Element,
 ) {
 	const folder = plugin.app.vault.getAbstractFileByPath(eventsFolder);
 
@@ -113,7 +113,7 @@ export async function renderTimeline(
 		const metadata = plugin.app.metadataCache.getFileCache(file);
 		const frontmatter = metadata?.frontmatter;
 		const lowerCaseFrontmatter = _.mapKeys(frontmatter, (_, key) =>
-			key.toLowerCase()
+			key.toLowerCase(),
 		);
 
 		console.log(file);
@@ -169,27 +169,26 @@ export async function renderTimeline(
 		})
 		.unique();
 
+	const table = container.createEl("tr", { cls: "timeline-table" });
+
 	dates.forEach((date) => {
 		const dateEvents = events.filter((event) => {
 			return formatDate(event.date, dateFormat, calendarConfig) === date;
 		});
-		const eventEl = container.createEl("div", {
-			cls: "timeline-event",
-		});
 
-		eventEl.createEl("span", { text: date, cls: "timeline-date" });
+		const row = table.createEl("tr", { cls: "timeline-row" });
+		const dateCell = row.createEl("td", { cls: "timeline-date" });
+		dateCell.createSpan({ text: date });
 
-		const eventList = eventEl.createEl("ul", { cls: "timeline-list" });
+		const eventsCell = row.createEl("td", { cls: "timeline-events" });
 
 		dateEvents.forEach((event) => {
 			const link = plugin.app.metadataCache.fileToLinktext(
 				event.file,
-				""
+				"",
 			);
 
-			const listItem = eventList.createEl("li", { cls: "timeline-item" });
-
-			const linkToFile = listItem.createEl("a", {
+			const linkToFile = eventsCell.createEl("a", {
 				text: event.file.basename,
 				cls: "timeline-link",
 			});
@@ -199,6 +198,8 @@ export async function renderTimeline(
 				e.preventDefault();
 				plugin.app.workspace.openLinkText(link, "", true);
 			});
+
+			eventsCell.createEl("br");
 		});
 	});
 }
